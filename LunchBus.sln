@@ -1,0 +1,48 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LunchBus.Api", "LunchBus.Api\LunchBus.Api.csproj", "{047CDDD3-5FBB-4A48-8C90-793D1C09BD0B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LunchBus.Api.Tests", "LunchBus.Api.Tests\LunchBus.Api.Tests.csproj", "{B0F7BF2C-0C43-4556-A061-E4AE744C2EDD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LunchBus.Web", "LunchBus.Web\LunchBus.Web.csproj", "{84D22D94-85C1-4EB9-949B-05DF656A6AF8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PublishScripts", "PublishScripts", "{DBE5AC03-1A13-4F91-AD98-2664C8F5BA14}"
+	ProjectSection(SolutionItems) = preProject
+		PublishScripts\AzureVMPublishModule.psm1 = PublishScripts\AzureVMPublishModule.psm1
+		PublishScripts\Publish-WebApplicationVM.ps1 = PublishScripts\Publish-WebApplicationVM.ps1
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Configurations", "Configurations", "{921042DA-CB23-4771-B315-E24FE9B95EDA}"
+	ProjectSection(SolutionItems) = preProject
+		PublishScripts\Configurations\LunchBusWeb-WAWS-dev.json = PublishScripts\Configurations\LunchBusWeb-WAWS-dev.json
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{047CDDD3-5FBB-4A48-8C90-793D1C09BD0B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{047CDDD3-5FBB-4A48-8C90-793D1C09BD0B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{047CDDD3-5FBB-4A48-8C90-793D1C09BD0B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{047CDDD3-5FBB-4A48-8C90-793D1C09BD0B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B0F7BF2C-0C43-4556-A061-E4AE744C2EDD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B0F7BF2C-0C43-4556-A061-E4AE744C2EDD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B0F7BF2C-0C43-4556-A061-E4AE744C2EDD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B0F7BF2C-0C43-4556-A061-E4AE744C2EDD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{84D22D94-85C1-4EB9-949B-05DF656A6AF8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{84D22D94-85C1-4EB9-949B-05DF656A6AF8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{84D22D94-85C1-4EB9-949B-05DF656A6AF8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{84D22D94-85C1-4EB9-949B-05DF656A6AF8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{921042DA-CB23-4771-B315-E24FE9B95EDA} = {DBE5AC03-1A13-4F91-AD98-2664C8F5BA14}
+	EndGlobalSection
+EndGlobal
