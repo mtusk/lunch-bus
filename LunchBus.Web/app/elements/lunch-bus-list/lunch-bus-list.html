@@ -7,11 +7,12 @@
     <template>
 
         <iron-ajax auto
-                   url="http://localhost:64961/api/buses"
+                   url="https://microsoft-apiappec2c1c0327a947be83a6e4e9a14b9ef0.azurewebsites.net/api/buses"
                    handle-as="json"
                    last-response="{{buses}}"
                    on-response="busesLoaded"
                    debounce-duration="300"></iron-ajax>
+        <!-- url="http://localhost:64961/api/buses" -->
         <!-- url="https://microsoft-apiappec2c1c0327a947be83a6e4e9a14b9ef0.azurewebsites.net/api/buses" -->
 
         <paper-menu class="list"
