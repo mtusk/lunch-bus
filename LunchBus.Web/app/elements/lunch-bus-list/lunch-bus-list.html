@@ -1,0 +1,36 @@
+﻿<link rel="import" href="../elements.html">
+
+<dom-module id="lunch-bus-list">
+
+    <link rel="import" type="css" href="lunch-bus-list.css">
+
+    <template>
+
+        <iron-ajax auto
+                   url="http://localhost:64961/api/buses"
+                   handle-as="json"
+                   last-response="{{buses}}"
+                   on-response="busesLoaded"
+                   debounce-duration="300"></iron-ajax>
+        <!-- url="https://microsoft-apiappec2c1c0327a947be83a6e4e9a14b9ef0.azurewebsites.net/api/buses" -->
+
+        <paper-menu class="list"
+                    attr-for-selected="item"
+                    selected="{{selectedBus}}"
+                    on-iron-activate="busTapped">
+            <template is="dom-repeat" items="{{buses}}">
+                <paper-item item="{{item}}">
+                    <div>
+                        <span>[[item.Name]]</span><br />
+                        <span>[[item.DestinationCity]]</span>,
+                        <span>[[item.DestinationState]]</span>
+                    </div>
+                </paper-item>
+            </template>
+        </paper-menu>
+
+    </template>
+
+    <script src="lunch-bus-list.js"></script>
+
+</dom-module>

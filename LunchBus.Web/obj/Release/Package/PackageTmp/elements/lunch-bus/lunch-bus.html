@@ -1,0 +1,103 @@
+<link rel="import" href="../elements.html">
+
+<dom-module id="lunch-bus">
+
+    <link rel="import" type="css" href="lunch-bus.css">
+
+    <template>
+
+        <iron-ajax auto
+                   url="https://microsoft-apiappec2c1c0327a947be83a6e4e9a14b9ef0.azurewebsites.net/api/buses"
+                   handle-as="json"
+                   last-response="{{buses}}"
+                   on-response="busesLoaded"
+                   debounce-duration="300"></iron-ajax>
+
+        <paper-drawer-panel id="navDrawerPanel" responsive-width="1280px">
+
+            <div class="nav" drawer>
+                <!-- Nav Content -->
+                <div>Hello, I'm in the nav!</div>
+            </div>
+
+            <paper-drawer-panel id="mainDrawerPanel"
+                                class="main-drawer-panel"
+                                main responsive-width="600px"
+                                drawer-width="[[_computeListWidth(_isMobile)]]"
+                                drawer-toggle-attribute="list-toggle"
+                                narrow="{{_isMobile}}">
+
+                <paper-header-panel class="list-panel" drawer>
+
+                    <!-- List Toolbar -->
+                    <paper-toolbar>
+                        <paper-icon-button icon="menu" paper-drawer-toggle></paper-icon-button>
+                        <div flex>I'm the title?</div>
+                    </paper-toolbar>
+
+                    <!-- List -->
+                    <paper-menu class="list"
+                                attr-for-selected="item"
+                                selected="{{selectedBus}}"
+                                on-iron-select="busSelected"
+                                on-iron-activate="busTapped">
+                        <template is="dom-repeat" items="{{buses}}">
+                            <paper-item item="{{item}}">{{item.Id}}</paper-item>
+                        </template>
+                    </paper-menu>
+
+                </paper-header-panel>
+
+                <paper-header-panel class="content-panel" main>
+
+                    <!-- Main Toolbar -->
+                    <paper-toolbar>
+                        <paper-icon-button icon="arrow-back" list-toggle></paper-icon-button>
+                    </paper-toolbar>
+
+                    <!-- Main Content -->
+                    <div class="content">
+                        <span>Id:</span><span>{{selectedBus.Id}}</span><br />
+                        <span>Name:</span><span>{{selectedBus.Name}}</span><br />
+                    </div>
+
+                </paper-header-panel>
+
+            </paper-drawer-panel>
+
+        </paper-drawer-panel>
+
+    </template>
+
+    <script>
+
+        Polymer({
+
+            is: 'lunch-bus',
+
+            _computeListWidth: function (isMobile) {
+                // when in mobile screen size, make the list be 100% width to cover the whole screen
+                return isMobile ? '100%' : '33%';
+            },
+
+            busesLoaded: function(e, detail) {
+                var buses = detail.response;
+
+                if (buses !== null) {
+                    this.selectedBus = buses[0];
+                }
+            },
+
+            busSelected: function () {
+                console.log('selection occurred');
+            },
+
+            busTapped: function () {
+                this.$.mainDrawerPanel.closeDrawer();
+            }
+
+        });
+
+    </script>
+
+</dom-module>

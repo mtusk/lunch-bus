@@ -1,0 +1,13 @@
+﻿:host {
+  display: block;
+}
+
+#busActionsContainer {
+    background-color:green;
+    height:300px;
+    @apply(--layout-horizontal);
+}
+
+#busActionsContainer div {
+    @apply(--layout-flex);
+}

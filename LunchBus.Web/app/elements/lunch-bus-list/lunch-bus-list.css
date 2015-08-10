@@ -1,0 +1,9 @@
+﻿.list {
+  padding: 0;
+}
+
+.list paper-item {
+  height: 80px;
+  border-bottom: 1px solid #dedede;
+  background-color: #fafafa;
+}
