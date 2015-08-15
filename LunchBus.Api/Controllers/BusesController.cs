@@ -1,7 +1,8 @@
-﻿using LunchBus.Api.Models;
+﻿using LunchBus.Model;
+using LunchBus.Storage;
 using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.Configuration;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
@@ -13,37 +14,32 @@ namespace LunchBus.Api.Controllers
     public class BusesController : ApiController
     {
         [HttpGet]
-        public IEnumerable<Bus> Get()
+        public IEnumerable<Bus> GetAsync()
         {
-            var buses = this.GenerateTestBuses();
-            return buses;
+            var connectionStringSetting = ConfigurationManager.ConnectionStrings["StorageConnectionString"];
+
+            if (connectionStringSetting == null)
+            {
+                throw new ConfigurationErrorsException("No connection string found");
+            }
+
+            var connectionString = connectionStringSetting.ConnectionString;
+            var context = new LunchBusContext(connectionString);
+
+            var upcomingBuses = context.Buses.GetUpcoming(TimeSpan.FromDays(2));
+
+            return upcomingBuses;
         }
 
         [HttpPost]
         public HttpResponseMessage Post([FromBody] Bus bus)
         {
-            // TODO: save the bus somewhere
+            var connectionString = ConfigurationManager.ConnectionStrings["StorageConnectionString"].ConnectionString;
+            var context = new LunchBusContext(connectionString);
+
+            context.Buses.Create(bus);
+
             return Request.CreateResponse(HttpStatusCode.Created);
-        }
-
-        private IEnumerable<Bus> GenerateTestBuses()
-        {
-            var buses = Enumerable
-                .Range(1, Faker.NumberFaker.Number(2, 25))
-                .Select(i => new Bus
-                {
-                    Id = i,
-                    Name = Faker.NameFaker.FirstName(),
-                    DestinationName = Faker.CompanyFaker.Name(),
-                    DestinationAddress = Faker.LocationFaker.Street(),
-                    DestinationCity = Faker.LocationFaker.City(),
-                    DestinationState = "MN",
-                    DestinationCountry = Faker.LocationFaker.Country(),
-                    DestinationPostalCode = Faker.LocationFaker.ZipCode(),
-                    DepartureTime = Faker.DateTimeFaker.DateTime(DateTime.Now, DateTime.Now.AddDays(2)),
-                });
-
-            return buses;
         }
     }
 }

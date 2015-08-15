@@ -6,18 +6,10 @@
 
     <template>
 
-        <iron-ajax auto
-                   url="https://microsoft-apiappec2c1c0327a947be83a6e4e9a14b9ef0.azurewebsites.net/api/buses"
-                   handle-as="json"
-                   last-response="{{buses}}"
-                   on-response="busesLoaded"
-                   debounce-duration="300"></iron-ajax>
-
         <paper-drawer-panel id="navDrawerPanel" responsive-width="1280px">
 
             <div class="nav" drawer>
-                <!-- Nav Content -->
-                <div>Hello, I'm in the nav!</div>
+                <lunch-bus-nav></lunch-bus-nav>
             </div>
 
             <paper-drawer-panel id="mainDrawerPanel"
@@ -29,37 +21,25 @@
 
                 <paper-header-panel class="list-panel" drawer>
 
-                    <!-- List Toolbar -->
                     <paper-toolbar>
                         <paper-icon-button icon="menu" paper-drawer-toggle></paper-icon-button>
-                        <div flex>I'm the title?</div>
+                        <div flex>Buses</div>
                     </paper-toolbar>
 
-                    <!-- List -->
-                    <paper-menu class="list"
-                                attr-for-selected="item"
-                                selected="{{selectedBus}}"
-                                on-iron-select="busSelected"
-                                on-iron-activate="busTapped">
-                        <template is="dom-repeat" items="{{buses}}">
-                            <paper-item item="{{item}}">{{item.Id}}</paper-item>
-                        </template>
-                    </paper-menu>
+                    <lunch-bus-list on-bus-tapped="busTapped" selected-bus="{{selectedBus}}"></lunch-bus-list>
 
                 </paper-header-panel>
 
-                <paper-header-panel class="content-panel" main>
+                <paper-header-panel class="content-panel" mode="waterfall-tall" main>
 
-                    <!-- Main Toolbar -->
-                    <paper-toolbar>
+                    <paper-toolbar class="tall">
                         <paper-icon-button icon="arrow-back" list-toggle></paper-icon-button>
+                        <span class="title"></span>
+                        <span class="bottom title">[[selectedBus.Name]]</span>
+                        <paper-icon-button icon="more-vert"></paper-icon-button>
                     </paper-toolbar>
 
-                    <!-- Main Content -->
-                    <div class="content">
-                        <span>Id:</span><span>{{selectedBus.Id}}</span><br />
-                        <span>Name:</span><span>{{selectedBus.Name}}</span><br />
-                    </div>
+                    <lunch-bus-detail bus="{{selectedBus}}"></lunch-bus-detail>
 
                 </paper-header-panel>
 
@@ -69,35 +49,6 @@
 
     </template>
 
-    <script>
-
-        Polymer({
-
-            is: 'lunch-bus',
-
-            _computeListWidth: function (isMobile) {
-                // when in mobile screen size, make the list be 100% width to cover the whole screen
-                return isMobile ? '100%' : '33%';
-            },
-
-            busesLoaded: function(e, detail) {
-                var buses = detail.response;
-
-                if (buses !== null) {
-                    this.selectedBus = buses[0];
-                }
-            },
-
-            busSelected: function () {
-                console.log('selection occurred');
-            },
-
-            busTapped: function () {
-                this.$.mainDrawerPanel.closeDrawer();
-            }
-
-        });
-
-    </script>
+    <script type="text/javascript" src="lunch-bus.js"></script>
 
 </dom-module>
